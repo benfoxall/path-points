@@ -24,6 +24,8 @@
   // J
   // var data = 'm-209.13 5.13c9.3 16.5 17.76 30.45 38.1 30.45 19.45 0 31.72-7.61 31.72-37.2v-201.3h59.2v202.1c0 61.3-35.94 89.2-88.4 89.2-47.4 0-74.85-24.53-88.81-54.075z';
 
+  var data = 'm0 0 100 100 m0 -100 -100 100';
+
   var width = 500, height = 500;
   var svg = d3.select('body')
       .append('svg')
@@ -46,11 +48,20 @@
 
   var g = point(path.node());
 
-  var points = d3.range(0, 1, 0.004).map(point(path.node()))
+  var points = d3.range(0, 1, 0.02).map(point(path.node()))
 
   // var points = d3.range(0, 1, 0.001).map(function(){
   //   return g(Math.random())
   // })
+
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
+shuffle(points)
+
 
   var xdomain = d3.extent(points.map(prop('x'))),
       ydomain = d3.extent(points.map(prop('y')));
